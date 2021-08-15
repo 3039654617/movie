@@ -1,27 +1,36 @@
-import { plainToClass } from "class-transformer";
-import { validate } from "class-validator";
-import { Movie } from "./entity/Movie";
+// import { plainToClass } from "class-transformer";
+// import { validate } from "class-validator";
+// import { Movie } from "./entities/Movie";
+import "reflect-metadata"
+import movieModel from "./db/db";
 
-// let obj = new Movie();
-// obj.name = "penglang";
-// obj.area="中国贵州";
-// obj.poster="";
-// obj.type= ["喜剧"];
-// obj.isComing = true;
-// obj.time = 100
+// // const obj = new Movie();
 
-let plain = {
-    name : "penglang",
-    area:"中国贵州",
-    poster:"",
-    type: ["喜剧"],
-    isComing : true,
-    time : 100
-}
+// // obj.poster = '';
+// // obj.name = '三傻大闹天空';
+// // obj.areas = [""];
+// // obj.types = [""];
+// // obj.description = '这是电影1';
+// // obj.isComing = true
 
-let obj = plainToClass(Movie, plain)
+// const obj = {
+//     poster: '',
+//     name: 1,
+//     areas: [""],
+//     types: [""],
+//     description: '这是电影1',
+//     isComing: true
+// }
 
-validate(obj).then((err) => {
-    console.log(err); 
-    
+// let plain = plainToClass(Movie, obj)
+
+// validate(plain).then((err) => {
+//     console.log(err, plain);
+// })
+
+
+movieModel.find().then((data) => {
+    data.map(item => {
+        console.log(item.name);
+    })
 })
