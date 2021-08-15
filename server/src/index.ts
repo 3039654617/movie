@@ -22,12 +22,6 @@ import movieModel from "./db/db";
 //     isComing: true
 // }
 
-// let plain = plainToClass(Movie, obj)
-
-// validate(plain).then((err) => {
-//     console.log(err, plain);
-// })
-
 
 movieModel.find().then((data) => {
     data.map(item => {
