@@ -1,6 +1,5 @@
 import { Type } from "class-transformer";
-import { ArrayMinSize, IsArray, IsNotEmpty, MinLength } from "class-validator";
-import "reflect-metadata"
+import { ArrayMinSize, IsNotEmpty } from "class-validator";
 
 export class Movie {
     public poster!: string;
