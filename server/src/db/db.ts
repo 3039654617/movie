@@ -9,12 +9,3 @@ Mongoose.connect("mongodb://localhost:27017/myMovies", {
 })
 
 export default movieModel;
-
-// movieModel.create({
-    // poster: '',
-    // name: 1,
-    // areas: [""],
-    // types: [""],
-    // description: '这是电影1',
-    // isComing: true
-// })
