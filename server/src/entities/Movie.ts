@@ -1,5 +1,6 @@
-import { Type } from "class-transformer";
-import { ArrayMinSize, IsNotEmpty } from "class-validator";
+import { plainToClass, Type } from "class-transformer";
+import { ArrayMinSize, IsNotEmpty, validate } from "class-validator";
+import { IMovie } from "../db/MovieSchema";
 
 export class Movie {
     public poster!: string;
@@ -20,4 +21,29 @@ export class Movie {
 
     @IsNotEmpty({message: "电影描述不能为空"})
     public description!: string;
+
+    public static plainClass(m: {}): Movie {
+        if(m instanceof Movie) {
+            return m;
+        }
+        return plainToClass(Movie, m)
+    }
+
+    public async validatorClass(flag: boolean = false): Promise<string[] | []> {
+        const arr = await validate(this, {
+            skipMissingProperties: flag
+        });
+
+        const arrArr = arr.map(item => {
+            const constraints = item.constraints;
+            const obj = {...constraints}
+            return Object.values(obj)
+        })
+
+        const resultArr: string[] = [];
+        arrArr.map(arr => {
+            return resultArr.push(...arr);
+        })
+        return resultArr;
+    }
 }
