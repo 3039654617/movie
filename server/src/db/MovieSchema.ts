@@ -1,7 +1,7 @@
 import Mongoose from "mongoose";
 import { Movie } from "../entities/Movie";
 
-export interface IMovie extends Movie, Mongoose.Document{};
+interface IMovie extends Movie, Mongoose.Document{};
 
 const movieSchema = new Mongoose.Schema<IMovie>({
     name: String,

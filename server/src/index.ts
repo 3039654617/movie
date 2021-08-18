@@ -2,8 +2,7 @@
 // import { validate } from "class-validator";
 // import { Movie } from "./entities/Movie";
 import "reflect-metadata"
-// import movieModel from "./db/db";
-import { MovieServers } from "./serverMovie/movieServers";
+import movieModel from "./db/db";
 
 // // const obj = new Movie();
 
@@ -15,31 +14,23 @@ import { MovieServers } from "./serverMovie/movieServers";
 // // obj.isComing = true
 
 // const obj = {
-    // name: "帽儿山",
+//     poster: '',
+//     name: 1,
+//     areas: [""],
+//     types: [""],
+//     description: '这是电影1',
+//     isComing: true
 // }
 
+// let plain = plainToClass(Movie, obj)
 
-// movieModel.find().then((data) => {
-    // data.map(item => {
-        // console.log(item.name);
-    // })
+// validate(plain).then((err) => {
+//     console.log(err, plain);
 // })
 
-// MovieServers.add(obj).then((e) => {
-    // console.log(e); 
-// })  
 
-// MovieServers.delete("611a9bc2e15edf2f5cd3c18e");611a9ef26b27b01d003dea1f
-// 
-// MovieServers.edit('611a9ef26b27b01d003dea1f', obj).then(e => {
-    // console.log(e);   
-// })
-
-// MovieServers.query('611a9ef26b27b01d003dea1f').then(e => {
-    // console.log(e);
-    // 
-// })
-
-// MovieServers.conditionQuery({}).then((e) => {
-    // console.log(e); 
-// })
+movieModel.find().then((data) => {
+    data.map(item => {
+        console.log(item.name);
+    })
+})
