@@ -1,9 +1,7 @@
-import { plainToClass, Type } from "class-transformer";
-import { ArrayMinSize, IsNotEmpty, validate } from "class-validator";
-import { IMovie } from "../db/MovieSchema";
-import { BaseClass } from "./BaseClass";
+import { Type } from "class-transformer";
+import { ArrayMinSize, IsNotEmpty } from "class-validator";
 
-export class Movie extends BaseClass{
+export class Movie {
     public poster!: string;
 
     @IsNotEmpty({message: "电影名字不能为空"})
@@ -22,8 +20,4 @@ export class Movie extends BaseClass{
 
     @IsNotEmpty({message: "电影描述不能为空"})
     public description!: string;
-
-    public static transformerThis(m: {}) {
-        return super.plainClass(Movie, m);
-    }
 }
