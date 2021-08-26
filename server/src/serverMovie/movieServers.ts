@@ -1,5 +1,5 @@
 import movieModel from "../db/db";
-import { ConditionQuery } from "../entities/conditionQuery";
+import { ConditionQuery } from "../entities/ConditionQuery";
 import { Movie } from "../entities/Movie";
 
 
@@ -19,7 +19,7 @@ export class MovieServers {
     }
 
     public static async delete (id: string) {
-        await movieModel.deleteOne({_id: id})
+        return await movieModel.deleteOne({_id: id})
     }
 
     public static async edit(id: string, movie: {}): Promise<string[]> {
