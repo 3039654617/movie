@@ -7,9 +7,9 @@ const app = Express();
 
 app.use(Express.json())
 
-app.use('/api/upload', imgRouter)
-app.use('/api/download', Express.static('./assets'))
-app.use('/api/movie', Router)
+app.use('/upload', imgRouter)
+app.use('/download', Express.static('./assets'))
+app.use('/movie', Router)
 
 app.listen(3000);
 

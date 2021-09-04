@@ -28,6 +28,15 @@ const config: IConfig =  {
       },
     }],
   ],
+  proxy: {
+    '/api': {
+      // target: 'http://11.11.75.41:10007',
+      target: 'http://localhost:3000',
+      // target: 'http://192.168.0.189',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
+  },
 }
 
 export default config;
