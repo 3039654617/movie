@@ -4,8 +4,8 @@ import {MovieServers} from '../serverMovie/movieServers'
 
 const Router = Express.Router();
 
-Router.post('/', (req, res) => {
-    const addRes = MovieServers.add(req.body);
+Router.post('/', async (req, res) => {
+    const addRes = await MovieServers.add(req.body);
 
     if(Array.isArray(addRes)) {
         const errData = addRes.join(';')
@@ -17,7 +17,7 @@ Router.post('/', (req, res) => {
     } else {
         res.send({
             err: '',
-            data: [],
+            data: addRes,
             status: "成功"
         })
     }
@@ -32,8 +32,8 @@ Router.delete('/:id', async (req, res) => {
     })
 })
 
-Router.put('/:id', (req, res) => {
-    const editData = MovieServers.edit(req.params.id, req.body)
+Router.put('/:id', async (req, res) => {
+    const editData = await MovieServers.edit(req.params.id, req.body)
     res.send({
         data: editData
     })
