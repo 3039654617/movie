@@ -4,8 +4,8 @@ import {MovieServers} from '../serverMovie/movieServers'
 
 const Router = Express.Router();
 
-Router.post('/', (req, res) => {
-    const addRes = MovieServers.add(req.body);
+Router.post('/', async (req, res) => {
+    const addRes = await MovieServers.add(req.body);
 
     if(Array.isArray(addRes)) {
         const errData = addRes.join(';')
@@ -17,7 +17,7 @@ Router.post('/', (req, res) => {
     } else {
         res.send({
             err: '',
-            data: [],
+            data: addRes,
             status: "成功"
         })
     }
@@ -28,12 +28,13 @@ Router.post('/', (req, res) => {
 Router.delete('/:id', async (req, res) => {
     const deleteData = await MovieServers.delete(req.params.id);
     res.send({
-        status: "删除成功"
+        data: deleteData,
+        status: `删除了${deleteData.deletedCount}条数据`
     })
 })
 
-Router.put('/:id', (req, res) => {
-    const editData = MovieServers.edit(req.params.id, req.body)
+Router.put('/:id', async (req, res) => {
+    const editData = await MovieServers.edit(req.params.id, req.body)
     res.send({
         data: editData
     })
@@ -50,7 +51,8 @@ Router.get('/', async (req, res) => {
 Router.get('/:id', async (req, res) => {
     const findOne = await MovieServers.query(req.params.id);
     res.send({
-        data: findOne
+        data: findOne,
+        status: 'success'
     })
 })
 

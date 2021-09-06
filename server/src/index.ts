@@ -7,9 +7,9 @@ const app = Express();
 
 app.use(Express.json());
 
-app.use('/api/upload', imgRouter);
-app.use('/download', Express.static('assets'));
-app.use('/api/movie', Router);
+app.use('/upload', imgRouter)
+app.use('/download', Express.static('./assets'))
+app.use('/movie', Router)
 
 app.listen(3000);
 
@@ -31,19 +31,19 @@ app.listen(3000);
 // // obj.isComing = true
 
 // for(let i = 0; i < 300; i++) {
-    // const obj = {
-        // name: `迪迦奥特曼第${i}部`,
-        // types: ["玄幻"],
-        // time: 199,
-        // description: `迪迦奥特曼第${i}部最好看`,
-        // isComing: true,
-        // poster: 111,
-        // areas: ["中国大陆"] 
-    // }
-// 
-    // MovieServers.add(obj).then((e) => {
-    //   console.log(e);  
-    // })  
+//     const obj = {
+//         name: `迪迦奥特曼第${i}部`,
+//         types: ["玄幻"],
+//         time: 199,
+//         description: `迪迦奥特曼第${i}部最好看`,
+//         isComing: true,
+//         poster: 111,
+//         areas: ["中国大陆"] 
+//     }
+
+//     MovieServers.add(obj).then((e) => {
+//       console.log(e);  
+//     })  
 // }
 
 // movieModel.find().then((data) => {
