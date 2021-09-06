@@ -28,7 +28,8 @@ Router.post('/', async (req, res) => {
 Router.delete('/:id', async (req, res) => {
     const deleteData = await MovieServers.delete(req.params.id);
     res.send({
-        status: "删除成功"
+        data: deleteData,
+        status: `删除了${deleteData.deletedCount}条数据`
     })
 })
 
@@ -50,7 +51,8 @@ Router.get('/', async (req, res) => {
 Router.get('/:id', async (req, res) => {
     const findOne = await MovieServers.query(req.params.id);
     res.send({
-        data: findOne
+        data: findOne,
+        status: 'success'
     })
 })
 
