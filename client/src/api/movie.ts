@@ -1,14 +1,7 @@
+import { iMovie } from '@/common/type';
 import axios from 'axios';
 
-type iMovie = {
-    name: string,
-    isComing: boolean,
-    poster: string | number,
-    description: string,
-    types: string[],
-    areas: string[],
-    time: number
-}
+
 
 type iCondition ={
     page?: number,
