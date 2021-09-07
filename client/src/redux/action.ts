@@ -1,34 +1,36 @@
 import { iMovie } from "@/common/type";
 
-export const addAction = (type: string, payload: iMovie[]) => {
+export const addAction = (movies: iMovie[], total: number) => {
     return {
-        type,
-        payload
+        type: 'addMovie',
+        payload: {
+            movies,
+            total
+        }
     }
 }
 
-export const decreaseAction = (type: string, payload: string) => {
+export const deleteAction = ( id: string) => {
     return {
-        type,
-        payload
+        type: 'deleteMovie',
+        payload: id
     }
 }
 
-type editPayload = {
-    id: string,
-    movie: Partial<iMovie>
-}
-export const editAction = (type: string, payload: editPayload) => {
+export const editAction = ( id: string, editMovie: Partial<iMovie>) => {
     return {
-        type,
-        payload
+        type: 'editMovie',
+        payload: {
+            id,
+            editMovie
+        }
     }
 }
 
-export const loadAction = (type: string, payload: boolean) => {
+export const loadAction = ( value: boolean) => {
     return {
-        type,
-        payload
+        type: 'setLoading',
+        payload: value
     }
 }
 
@@ -38,11 +40,15 @@ type condition = {
     limit?: number
 }
 
-export const conditionAction = (type: string, payload: condition) => {
+export const conditionAction = (condition: condition) => {
     return {
-        type,
-        payload
+        type: 'conditionMovie',
+        payload: {
+            name: condition.name,
+            page: condition.page,
+            limit: condition.limit
+        }
     }
 }
 
-// export const allAction: addAction | decreaseAction
+// export type allAction = addAction | deleteAction | editAction | loadAction | conditionAction;
