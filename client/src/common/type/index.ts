@@ -1,5 +1,6 @@
 
 export type iMovie = {
+    _id?: string,
     name: string,
     isComing: boolean,
     poster: string | number,
