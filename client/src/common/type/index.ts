@@ -8,3 +8,9 @@ export type iMovie = {
     areas: string[],
     time: number
 }
+
+export type condition = {
+    name?: string,
+    page?: number,
+    limit?: number
+}
