@@ -51,7 +51,7 @@ export class MovieServers {
              return {
                  err: validateArr,
                  data: [],
-                 conunt: 0
+                 count: 0
              };
          }
 

@@ -1,7 +1,7 @@
 import {iMovie} from '@/common/type'
 import { Reducer } from 'react'
 import {condition} from '@/common/type'
-import { AddAction, DeleteAction, EditAction, LoadAction, ConditionAction} from './action'
+import { allAction, AddAction, DeleteAction, EditAction, LoadAction, ConditionAction} from './action'
 
 export interface IMovieState {
     /**
@@ -30,7 +30,7 @@ const defauleState = {
     data: [],
     isLoading: false,
     condition: {
-        page: 1,
+        page: 10,
         name: '',
         limit: 10
     },
@@ -77,7 +77,7 @@ const deleteMovie: MovieReducer<DeleteAction> = function (state, action) {
     }
 }
 
-export const reducer = (state = defauleState, Action: any) => {
+export const reducer = (state = defauleState, Action: allAction) => {
     switch (Action.type) {
         case 'addMovie':
             return saveMovie(state, Action)

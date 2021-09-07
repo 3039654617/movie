@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {add, del, edit, condition, findOne} from '../api/movie'
 import { Descriptions } from 'antd'
+import store from '@/redux/store'
+import { fetchMovies } from '@/redux/action'
 
 type movie = {
     name: string,
@@ -13,7 +15,7 @@ type movie = {
     time: number
 }
 export default function Index() {
-    const [state, setState] = useState([])
+    const [state, setState] = useState(1)
 
     const obj = {
         name: `迪力巴巴奥特曼第${999}部`,
@@ -45,7 +47,7 @@ export default function Index() {
             // setState(data.data.data)
         // })
 
-        axios.get('/api/movie', {params: {page: 8, limit: 10}}).then(data => {
+        // axios.get('/api/movie', {params: {page: 8, limit: 10}}).then(data => {
             // console.log(data.data.data.data);
             // 
             // setState(data.data.data.data)
@@ -55,16 +57,16 @@ export default function Index() {
                 // return item.name
             // })
             // setState(items)
-            const arr = data.data.data.data.map((e: any) => e.name)
-            const arrList = arr.map((e: any, index) => {
-                return (
-                    <li key={index}>{e}</li>
-                )
-            })
-            setState(arrList)
+            // const arr = data.data.data.data.map((e: any) => e.name)
+            // const arrList = arr.map((e: any, index) => {
+                // return (
+                    // <li key={index}>{e}</li>
+                // )
+            // })
+            // setState(arrList)
             // console.log(arrList);
             
-        })
+        // })
         // "6135cb376fc02b39b864d76a"
         // del("6135c332a1f6bd39e8f508ab").then(res => {
         //     console.log(res);          
@@ -81,19 +83,28 @@ export default function Index() {
         //     console.log(res);
         // })
 
-        findOne("6135c333a1f6bd39e8f50911").then(res => {
-            console.log(res);           
-        })
+        // findOne("6135c333a1f6bd39e8f50911").then(res => {
+            // console.log(res);           
+        // })
         // add(obj).then(data => {
         //     console.log(data);
             
         // })
+
+        store.dispatch(fetchMovies({page: 5, name: '', limit: 10}) as any);
+        console.log(store.getState());
     }, [])
+    useEffect(()=> {
+        console.log(store.getState());
+    }, [state])
     // console.log(state);
     
     return (
         <div>
             {state}
+            <button onClick={() => {
+                setState(state + 1)
+            }}>dianji</button>
         </div>
     )
 }

@@ -1,5 +1,8 @@
 import { iMovie, condition } from "@/common/type";
 import { iAction } from "@/common/interface";
+import { ThunkAction } from "redux-thunk";
+import { IMovieState } from "./reducer";
+import { add, conditionMovie, del } from "@/api/movie";
 
 
 //仓库添加分页数据
@@ -67,10 +70,35 @@ export const conditionAction = (condition: condition): ConditionAction => {
 
 export type allAction = AddAction | DeleteAction | EditAction | LoadAction | ConditionAction;
 
+export const fetchMovies = (cond: condition): ThunkAction<Promise<void>, IMovieState, any, allAction> => {
+    return async (dispatch, getState) => {
+        dispatch(loadAction(true));
+        dispatch(conditionAction(cond));
+        const curCondition = getState().reducer.condition;
+        console.log(curCondition, getState())
+        const resp = await conditionMovie(curCondition);
+        
+        dispatch(addAction(resp.data.data.data, resp.data.data.count));
+        dispatch(loadAction(false));
+    }
+}
+
+function deleteMovie(id: string)
+    : ThunkAction<Promise<void>, IMovieState, any, allAction> {
+    return async dispatch => {
+        dispatch(loadAction(true));
+        await del(id);
+        dispatch(deleteAction(id));//删除本地仓库中的数据
+        dispatch(loadAction(false));
+    }
+}
+
 export default {
     addAction,
     deleteAction,
     editAction,
     loadAction,
-    conditionAction
+    conditionAction,
+    fetchMovies,
+    deleteMovie
 }

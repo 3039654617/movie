@@ -12,7 +12,7 @@ type iCondition ={
 
 export const add = (movie: iMovie) => {
     return axios.post('/api/movie', movie).then(res => {
-        return res.data  
+        return res
     })
 }
 
@@ -28,7 +28,7 @@ export const edit = (id: string, movie: any) => {
     })
 }
 
-export const condition = (data: iCondition) => {
+export const conditionMovie = (data: iCondition):any => {
     return axios.get('api/movie', {
         params: data
     }).then(res => res)
