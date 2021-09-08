@@ -6,7 +6,7 @@ const config: IConfig =  {
   routes: [
     {
       path: '/',
-      component: '../layouts/index',
+      component: '../layouts/globall',
       routes: [
         { path: '/', component: '../pages/index' }
       ]
@@ -28,6 +28,9 @@ const config: IConfig =  {
       },
     }],
   ],
+  cssLoaderOptions: {
+    localIdentName: '[local]'
+  },
   proxy: {
     '/api': {
       // target: 'http://11.11.75.41:10007',
