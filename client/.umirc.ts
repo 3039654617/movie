@@ -6,7 +6,7 @@ const config: IConfig =  {
   routes: [
     {
       path: '/',
-      component: '../layouts/globall',
+      component: '../layouts/index',
       routes: [
         { path: '/', component: '../pages/index' }
       ]
