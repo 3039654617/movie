@@ -1,15 +1,26 @@
-
-.normal {
-  font-family: Georgia, sans-serif;
-  text-align: center;
+#components-layout-demo-top-side .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
 }
 
-.title {
-  font-size: 2.5rem;
-  font-weight: normal;
-  letter-spacing: -1px;
-  background: darkslateblue;
-  padding: 0 0;
-  color: white;
-  margin: 0;
+.ant-row-rtl #components-layout-demo-top-side .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
 }
+
+.layout{
+  height: 100vh;
+}
+.ant-layout-content{
+  padding: 0 !important;
+  // height: 1200px;
+  .site-layout-background {
+    background: rgb(212, 219, 221);
+    padding: 0 !important;
+  }
+}
+
+
