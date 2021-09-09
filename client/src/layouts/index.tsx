@@ -1,42 +1,74 @@
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import './index.less'
 import React from 'react';
+import { Link, router } from 'umi'
+import logo from '../assets/logo.png'
 
-const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
 
-const BasicLayout: React.FC = () => {
+const BasicLayout: React.FC = (props) => {
+  const onClickP = (pIndex: number) => {
+    const flag = document.documentElement.querySelectorAll('p');
+    switch (flag[pIndex]?.outerText) {
+      case '关于电影':
+        const flagUl = document.documentElement.querySelectorAll('ul')[0];
+        flagUl.style.display = flagUl.style.display === 'block' ? '' : 'block';
+        // if(flagUl.style.display = 'block')
+        // console.log(flagUl.style);
+        
+    }
+  }
+  const onClickLi = (liIndex: number) => {
+    const flag = document.documentElement.querySelectorAll('li');
+    // console.log(flag);
+    
+    switch (flag[liIndex]?.outerText) {
+      case '电影列表':
+        for(let i = 0; i < flag.length; i++) {
+          flag[i].className = ''
+        }
+        flag[liIndex].className = 'selected'
+        console.log(flag[liIndex]);
+        
+        router.push('./first');
+        break;
+      case '增加电影':
+        for(let i = 0; i < flag.length; i++) {
+          flag[i].className = ''
+        }
+        flag[liIndex].className = 'selected'
+        router.push('./create');
+        break;
+      // default:
+        // router.push('./');
+    }
+    
+  }
   return (
-    <Layout>
-      <Header className="header">
-        <div className="logo" />
-      </Header>
-      <Content style={{ padding: '0 50px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
-        <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
-          <Sider className="site-layout-background" width={200}>
-            <Menu
-              mode="inline"
-              defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
-              style={{ height: '100%' }}
-            >
-              <SubMenu key="sub1" icon={<UserOutlined />} title="关于电影">
-                <Menu.Item key="1">电影菜单</Menu.Item>
-                <Menu.Item key="2">添加电影</Menu.Item>
-              </SubMenu>
-            </Menu>
-          </Sider>
-          <Content style={{ padding: '0 24px', minHeight: 280 }}>Content</Content>
-        </Layout>
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
-    </Layout>
+    <div className='layout'>
+       <div className="header">
+         <div className='logo'>
+           <img src={logo} alt="logo加载失败" />
+         </div>
+         <div className="right">欢迎来到一个充满神话的世界...</div>
+       </div>
+       <div className="body">
+         <div className="menu-list">
+           <p onClick={() => {
+             onClickP(0)
+           }}>关于电影</p>
+           <ul>
+             <li onClick={() => {
+              onClickLi(0)
+             }}>电影列表</li>
+             <li onClick={() => {
+              onClickLi(1)
+             }}>增加电影</li>
+           </ul>
+         </div>
+         <div className="content">
+           {props.children}
+         </div>
+       </div>
+    </div>
   );
 };
 

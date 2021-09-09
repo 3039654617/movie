@@ -8,7 +8,17 @@ const config: IConfig =  {
       path: '/',
       component: '../layouts/index',
       routes: [
-        { path: '/', component: '../pages/index' }
+        { path: '/', redirect: '/first' },
+        { 
+          path: '/first',
+          name: '首页', 
+          component: '../pages/movies-list/index' 
+        },
+        { 
+          path: '/create', 
+          name: '添加',
+          component: '../pages/movie-create/index' 
+        }
       ]
     }
   ],
