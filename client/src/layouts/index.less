@@ -1,3 +1,11 @@
+@keyframes fadeWay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .layout{
   height: 100%;
   .header{
@@ -32,21 +40,26 @@
       width: 10vw;
       p{
         padding-left: 1vw;
+        cursor: pointer;
       }
       ul{
         padding-left: 0;
         list-style: none;
-        display: none;
+        opacity: 0;
+        cursor: pointer;
+        animation: fadeWayIn 1s;
         // border: 1px solid rgb(47, 143, 60);
         li{
           height: 3vh;
+          line-height: 3vh;
           padding: 3px;
           text-align: center;
-          margin: 0;
+          margin: 6px 0;
           border: 0;
           // border: 1px solid red;
           &:hover{
             background-color: rgb(16, 212, 247);
+            animation: fadeWay 3s;
           }
         }
         li.selected{

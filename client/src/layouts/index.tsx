@@ -10,7 +10,7 @@ const BasicLayout: React.FC = (props) => {
     switch (flag[pIndex]?.outerText) {
       case '关于电影':
         const flagUl = document.documentElement.querySelectorAll('ul')[0];
-        flagUl.style.display = flagUl.style.display === 'block' ? '' : 'block';
+        flagUl.style.opacity = flagUl.style.opacity === '0' ? '1' : '0';
         // if(flagUl.style.display = 'block')
         // console.log(flagUl.style);
         
