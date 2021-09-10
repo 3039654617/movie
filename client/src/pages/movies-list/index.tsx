@@ -1,126 +1,88 @@
-import React from 'react';
-import {Table} from 'antd'
+import React, { useEffect, useState } from 'react';
+import {Table, Alert} from 'antd'
+import './index.less'
+import { conditionMovie } from '@/api/movie';
 
-export default function() {
-  const dataSource = [
-    {
-      key: '1',
-      name: '胡彦斌',
-      age: 32,
-      address: '西湖区湖底公园1号',
-    },
-    {
-      key: '2',
-      name: '胡彦祖',
-      age: 42,
-      address: '西湖区湖底公园1号',
-    },
-    {
-      key: '2',
-      name: '胡彦祖',
-      age: 42,
-      address: '西湖区湖底公园1号',
-    },
-    {
-      key: '2',
-      name: '胡彦祖',
-      age: 42,
-      address: '西湖区湖底公园1号',
-    },
-    {
-      key: '2',
-      name: '胡彦祖',
-      age: 42,
-      address: '西湖区湖底公园1号',
-    },
-    {
-      key: '2',
-      name: '胡彦祖',
-      age: 42,
-      address: '西湖区湖底公园1号',
-    }
-  ];
+ const TableList:React.FC<{}> = (props) => {
+  const [dataSource, setDataSource] = useState([]);
+  
+  const getMovies = () => {
+    conditionMovie({limit: 0}).then(res => {
+      const list = res.data.data.data.map((item, index) => {
+        const isComing = item.isComing === true ? '上' : '不上';
+        return {...item, key: index, isComing}
+      })
+      console.log(res.data.data.data, typeof(res.data.data.data));
+      setDataSource(list)
+      if(typeof(res.data.data.data) ===  'object') {
+        const dafaultData = new Array(9).fill({
+            areas: ['中国大陆'],
+            description: "迪迦奥特曼第3部最好看",
+            isComing: '不上',
+            name: "迪迦奥特曼第3部",
+            poster: "111",
+            types: ['玄幻'],
+            _id: "611e6aa19a560429f436793c",
+        })
+        console.log(2222);
+        
+        setDataSource(dafaultData as any)
+      }
+    })
+  }
+
+  useEffect(() => {
+    getMovies();  
+  }, [])
   
   const columns = [
     {
-      title: '姓名',
+      title: '海报宣传',
+      dataIndex: 'poster',
+      key: 'poster',
+    },
+    {
+      title: '电影名',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: '年龄',
-      dataIndex: 'age',
-      key: 'age',
+      title: '即将上映',
+      dataIndex: 'isComing',
+      key: 'isComing',
     },
     {
-      title: '住址',
-      dataIndex: 'address',
-      key: 'address',
+      title: '类型',
+      dataIndex: 'types',
+      key: 'types',
     },
     {
-      title: '姓名',
-      dataIndex: 'name',
-      key: 'name',
+      title: '地区',
+      dataIndex: 'areas',
+      key: 'areas',
     },
     {
-      title: '年龄',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: '住址',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: '姓名',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '年龄',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: '住址',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: '姓名',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '年龄',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: '住址',
-      dataIndex: 'address',
-      key: 'address',
-    },
-    {
-      title: '姓名',
-      dataIndex: 'name',
-      key: 'name',
-    },
-    {
-      title: '年龄',
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: '住址',
-      dataIndex: 'address',
-      key: 'address',
-    },
+      title: '描述',
+      dataIndex: 'description',
+      key: 'description'
+    }
   ];
   return (
     <div>
+      <div className='tips'>
+        <Alert
+          message=""
+          description="数据库还没有数据，快快去添加吧"
+          type="error"
+          closable={true}
+          onClose={() => {
+          }}
+        />
+      </div>
       <Table dataSource={dataSource} columns={columns} />
     </div>
   );
 }
+
+
+export default TableList;

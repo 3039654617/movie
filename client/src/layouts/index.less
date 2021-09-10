@@ -34,13 +34,19 @@
     // border: 1px solid green;
     height: 90vh;
     display: flex;
+    overflow: hidden;
+    background: url(../assets/bg.jpg) no-repeat;
+    background-size: 100% 100%;
     .menu-list{
-      // border: 1px solid red;
-      background-color: rgb(62, 123, 151);
+      border-right: 1px solid rgba(255, 255, 255, 0.5);
+      // background-color: rgb(62, 123, 151);
       width: 10vw;
       p{
+        margin-top: 1vh;
         padding-left: 1vw;
         cursor: pointer;
+        font-size: large;
+        color: chocolate;
       }
       ul{
         padding-left: 0;
@@ -50,12 +56,14 @@
         animation: fadeWayIn 1s;
         // border: 1px solid rgb(47, 143, 60);
         li{
-          height: 3vh;
-          line-height: 3vh;
+          height: 5vh;
+          line-height: 5vh;
           padding: 3px;
           text-align: center;
           margin: 6px 0;
           border: 0;
+          color: rgb(228, 47, 213);
+          font-size: large;
           // border: 1px solid red;
           &:hover{
             background-color: rgb(16, 212, 247);
@@ -68,7 +76,8 @@
       }
     }
     .content{
-      border: 1px solid rgb(0, 60, 255);
+      width: 100%;
+      // border: 1px solid rgb(0, 60, 255);
       height: 90vh;
     }
   }

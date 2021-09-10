@@ -28,7 +28,7 @@ export const edit = (id: string, movie: any) => {
     })
 }
 
-export const conditionMovie = (data: iCondition):any => {
+export const conditionMovie = (data: iCondition) => {
     return axios.get('api/movie', {
         params: data
     }).then(res => res)
