@@ -2,7 +2,7 @@ import { iMovie, condition } from "@/common/type";
 import { iAction } from "@/common/interface";
 import { ThunkAction } from "redux-thunk";
 import { IMovieState } from "./reducer";
-import { add, conditionMovie, del } from "@/api/movie";
+import { add, conditionMovie, del, edit } from "@/api/movie";
 
 
 //仓库添加分页数据
@@ -92,6 +92,14 @@ function deleteMovie(id: string)
     }
 }
 
+function editMovie(id: string, updateMovie: Partial<iMovie>) 
+    : ThunkAction<Promise<void>, IMovieState, any, allAction> {
+    return async dispatch => {
+        dispatch(editAction(id, updateMovie))
+        await edit(id, updateMovie)
+    }
+}
+
 export default {
     addAction,
     deleteAction,
@@ -99,5 +107,6 @@ export default {
     loadAction,
     conditionAction,
     fetchMovies,
+    editMovie,
     deleteMovie
 }

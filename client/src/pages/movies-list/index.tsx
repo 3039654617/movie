@@ -8,7 +8,14 @@ import { connect } from 'react-redux'
 import { IMovieState } from '@/common/type'
 import {router} from 'umi'
 
-const TableList:React.FC = (props) => {
+interface state {
+  state: IMovieState
+}
+
+interface events {
+  onload: () => void
+}
+const TableList:React.FC = (props: any) => {
   const [dataSource, setDataSource] = useState([]);
   console.log(props);
    
