@@ -12,8 +12,6 @@ const TableList:React.FC = (props) => {
   console.log(props);
    
   const getMovies = async () => {
-    props.onload && props.onload();
-    
     const data = store.getState().reducer.data;
     const list = data.map((item: { isComing: boolean; }, index: any) => {
     const isComing = item.isComing === true ? '上' : '不上';
@@ -49,8 +47,12 @@ const TableList:React.FC = (props) => {
   // }
 
   useEffect(() => {
+    props.onload && props.onload();
+  }, [props])
+
+  useEffect(() => {
     getMovies();  
-  }, [getMovies])
+  }, [store.getState().reducer.data])
   
   const columns = [
     {
