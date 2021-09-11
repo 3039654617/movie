@@ -97,10 +97,10 @@ import store from '../../redux/store'
             <span 
               style={{marginLeft: '1vw', cursor: 'pointer'}}
               onClick={() => {
-                console.log(text, record);
+                store.dispatch(action.deleteMovie(record._id) as any)
               }}
             >
-              修改
+              删除
             </span>
           </div>
         )
