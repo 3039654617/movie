@@ -45,10 +45,12 @@ const TableList:React.FC = (props) => {
       // }
     // })
   // }
-
-  useEffect(() => {
+  const init = () => {
     props.onload && props.onload();
-  }, [props])
+  }
+  useEffect(() => {
+    init()
+  }, [init])
 
   useEffect(() => {
     getMovies();  
