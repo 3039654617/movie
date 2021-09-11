@@ -75,7 +75,6 @@ export const fetchMovies = (cond: condition): ThunkAction<Promise<void>, IMovieS
         dispatch(loadAction(true));
         dispatch(conditionAction(cond));
         const curCondition = getState().reducer.condition;
-        console.log(curCondition, getState())
         const resp = await conditionMovie(curCondition);
         
         dispatch(addAction(resp.data.data.data, resp.data.data.count));

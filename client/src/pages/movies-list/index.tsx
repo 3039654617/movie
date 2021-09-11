@@ -10,13 +10,16 @@ import store from '../../redux/store'
   
   const getMovies = () => {
     store.dispatch(action.fetchMovies({
-      limit: 8
+      limit: 100,
+      page: 1
     }) as any)
     const data = store.getState().reducer.data;
     const list = data.map((item, index) => {
       const isComing = item.isComing === true ? '上' : '不上';
       return {...item, key: index, isComing}
     })
+    console.log(list.key, data);
+    
     // conditionMovie({limit: 0}).then(res => {
       // const list = res.data.data.data.map((item, index) => {
         // const isComing = item.isComing === true ? '上' : '不上';
@@ -74,12 +77,41 @@ import store from '../../redux/store'
       title: '描述',
       dataIndex: 'description',
       key: 'description'
+    },
+    {
+      title: '操作',
+      dataIndex: 'operation',
+      key: 'operation',
+      render: (text, record) => {
+        
+        return (
+          <div className='operation'>
+            <span 
+              style={{cursor: 'pointer'}}
+              onClick={() => {
+                console.log(text, record);
+              }}
+            >
+              编辑
+            </span>
+            <span 
+              style={{marginLeft: '1vw', cursor: 'pointer'}}
+              onClick={() => {
+                console.log(text, record);
+              }}
+            >
+              修改
+            </span>
+          </div>
+        )
+      }
     }
   ];
   return (
     <div>
       <div className='tips'>
-        <Alert
+        {
+          false && <Alert
           message=""
           description="数据库还没有数据，快快去添加吧"
           type="error"
@@ -87,8 +119,13 @@ import store from '../../redux/store'
           onClose={() => {
           }}
         />
+        }
       </div>
-      <Table dataSource={dataSource} columns={columns} />
+      <Table 
+        dataSource={dataSource} 
+        columns={columns} 
+        pagination={true}
+      />
     </div>
   );
 }
