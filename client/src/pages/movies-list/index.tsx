@@ -2,33 +2,42 @@ import React, { useEffect, useState } from 'react';
 import {Table, Alert} from 'antd'
 import './index.less'
 import { conditionMovie } from '@/api/movie';
+import action from '../../redux/action'
+import store from '../../redux/store'
 
  const TableList:React.FC<{}> = (props) => {
   const [dataSource, setDataSource] = useState([]);
   
   const getMovies = () => {
-    conditionMovie({limit: 0}).then(res => {
-      const list = res.data.data.data.map((item, index) => {
-        const isComing = item.isComing === true ? '上' : '不上';
-        return {...item, key: index, isComing}
-      })
-      console.log(res.data.data.data, typeof(res.data.data.data));
-      setDataSource(list)
-      if(typeof(res.data.data.data) ===  'object') {
-        const dafaultData = new Array(9).fill({
-            areas: ['中国大陆'],
-            description: "迪迦奥特曼第3部最好看",
-            isComing: '不上',
-            name: "迪迦奥特曼第3部",
-            poster: "111",
-            types: ['玄幻'],
-            _id: "611e6aa19a560429f436793c",
-        })
-        console.log(2222);
-        
-        setDataSource(dafaultData as any)
-      }
+    store.dispatch(action.fetchMovies({
+      limit: 8
+    }) as any)
+    const data = store.getState().reducer.data;
+    const list = data.map((item, index) => {
+      const isComing = item.isComing === true ? '上' : '不上';
+      return {...item, key: index, isComing}
     })
+    // conditionMovie({limit: 0}).then(res => {
+      // const list = res.data.data.data.map((item, index) => {
+        // const isComing = item.isComing === true ? '上' : '不上';
+        // return {...item, key: index, isComing}
+    // })
+    // console.log(res.data.data.data, typeof(res.data.data.data));
+    setDataSource(list)
+    // if(typeof(res.data.data.data) ===  'object') {
+      // const dafaultData = new Array(9).fill({
+          // areas: ['中国大陆'],
+          // description: "迪迦奥特曼第3部最好看",
+          // isComing: '不上',
+          // name: "迪迦奥特曼第3部",
+          // poster: "111",
+          // types: ['玄幻'],
+          // _id: "611e6aa19a560429f436793c",
+      // })
+      
+    // setDataSource(dafaultData as any)
+      // }
+    // })
   }
 
   useEffect(() => {

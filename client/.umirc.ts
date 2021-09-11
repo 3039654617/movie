@@ -12,6 +12,11 @@ const config: IConfig =  {
         { 
           path: '/first',
           name: '首页', 
+          component: '../pages/first-page/index' 
+        },
+        { 
+          path: '/movie', 
+          name: '添加',
           component: '../pages/movies-list/index' 
         },
         { 

@@ -21,14 +21,23 @@ const BasicLayout: React.FC = (props) => {
     // console.log(flag);
     
     switch (flag[liIndex]?.outerText) {
+      case '电影系统':
+        for(let i = 0; i < flag.length; i++) {
+          flag[i].className = ''
+        }
+        flag[liIndex].className = 'selected'
+        // console.log(flag[liIndex]);
+        
+        router.push('./first');
+        break;
       case '电影列表':
         for(let i = 0; i < flag.length; i++) {
           flag[i].className = ''
         }
         flag[liIndex].className = 'selected'
-        console.log(flag[liIndex]);
+        // console.log(flag[liIndex]);
         
-        router.push('./first');
+        router.push('./movie');
         break;
       case '增加电影':
         for(let i = 0; i < flag.length; i++) {
@@ -56,11 +65,14 @@ const BasicLayout: React.FC = (props) => {
              onClickP(0)
            }}>关于电影</p>
            <ul>
-             <li onClick={() => {
-              onClickLi(0)
-             }}>电影列表</li>
+           <li onClick={() => {
+             onClickLi(0)
+            }}>电影系统</li>
              <li onClick={() => {
               onClickLi(1)
+             }}>电影列表</li>
+             <li onClick={() => {
+              onClickLi(2)
              }}>增加电影</li>
            </ul>
          </div>
