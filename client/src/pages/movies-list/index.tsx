@@ -6,6 +6,7 @@ import action from '../../redux/action'
 import store from '../../redux/store'
 import { connect } from 'react-redux'
 import { IMovieState } from '@/common/type'
+import {router} from 'umi'
 
 const TableList:React.FC = (props) => {
   const [dataSource, setDataSource] = useState([]);
@@ -98,7 +99,7 @@ const TableList:React.FC = (props) => {
             <span 
               style={{cursor: 'pointer'}}
               onClick={() => {
-                console.log(text, record);
+                router.push('/create')
               }}
             >
               编辑
