@@ -4,21 +4,26 @@ import './index.less'
 import { conditionMovie } from '@/api/movie';
 import action from '../../redux/action'
 import store from '../../redux/store'
+import { connect } from 'react-redux'
+import { IMovieState } from '@/common/type'
 
- const TableList:React.FC<{}> = (props) => {
+const TableList:React.FC = (props) => {
   const [dataSource, setDataSource] = useState([]);
-  
-  const getMovies = () => {
-    store.dispatch(action.fetchMovies({
-      limit: 100,
-      page: 1
-    }) as any)
+  console.log(props);
+   
+  const getMovies = async () => {
+    props.onload && props.onload();
+    
     const data = store.getState().reducer.data;
-    const list = data.map((item, index) => {
-      const isComing = item.isComing === true ? '上' : '不上';
+    const list = data.map((item: { isComing: boolean; }, index: any) => {
+    const isComing = item.isComing === true ? '上' : '不上';
       return {...item, key: index, isComing}
     })
-    console.log(list.key, data);
+    setDataSource(list)
+  }
+   
+   
+   
     
     // conditionMovie({limit: 0}).then(res => {
       // const list = res.data.data.data.map((item, index) => {
@@ -26,7 +31,7 @@ import store from '../../redux/store'
         // return {...item, key: index, isComing}
     // })
     // console.log(res.data.data.data, typeof(res.data.data.data));
-    setDataSource(list)
+    // setDataSource(list)
     // if(typeof(res.data.data.data) ===  'object') {
       // const dafaultData = new Array(9).fill({
           // areas: ['中国大陆'],
@@ -41,11 +46,11 @@ import store from '../../redux/store'
     // setDataSource(dafaultData as any)
       // }
     // })
-  }
+  // }
 
   useEffect(() => {
     getMovies();  
-  }, [])
+  }, [getMovies])
   
   const columns = [
     {
@@ -82,7 +87,7 @@ import store from '../../redux/store'
       title: '操作',
       dataIndex: 'operation',
       key: 'operation',
-      render: (text, record) => {
+      render: (text: any, record: { _id: string; }) => {
         
         return (
           <div className='operation'>
@@ -130,5 +135,19 @@ import store from '../../redux/store'
   );
 }
 
+const mapStateToProps = (state) => {
+  return state.reducer
+}
 
-export default TableList;
+const mapStateToEvents = (dispatch) => {
+  return {
+    onload() {
+      dispatch(action.fetchMovies({
+        limit: 100,
+        page: 1
+      }) as any)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapStateToEvents)(TableList);
