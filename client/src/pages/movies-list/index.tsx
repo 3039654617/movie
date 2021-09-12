@@ -129,17 +129,8 @@ const TableList:React.FC = (props: any) => {
     return {
       current: props.condition.page,
       total: props.total,
-      limit: props.condition.limit
+      pageSize: props.condition.limit
     }
-  }
-
-  function onChange(pagin: any) {
-    console.log(pagin, pagin.limit, pagin.page);
-    
-    store.dispatch(action.fetchMovies({
-      limit: pagin.pageSize,
-      page: pagin.current
-    }) as any)
   }
 
   return (
@@ -160,7 +151,7 @@ const TableList:React.FC = (props: any) => {
         dataSource={dataSource} 
         columns={columns} 
         pagination={pagination()}
-        onChange={onChange}
+        onChange={props.onChange}
       />
     </div>
   );
@@ -180,6 +171,14 @@ const mapStateToEvents = (dispatch) => {
     },
     delete(id: string) {
       store.dispatch(action.deleteMovie(id) as any)
+    },
+    onChange(pagin: any) {
+      console.log(pagin, pagin.limit, pagin.page);
+      
+      store.dispatch(action.fetchMovies({
+        limit: pagin.pageSize,
+        page: pagin.current
+      }) as any)
     }
   }
 }

@@ -100,6 +100,14 @@ function editMovie(id: string, updateMovie: Partial<iMovie>)
     }
 }
 
+// function addMovie(movie: iMovie[], total: number) 
+    // : ThunkAction<Promise<void>, IMovieState, any, allAction> {
+    // return async dispatch => {
+        // dispatch(addAction(movie, total))
+        // await edit(id, updateMovie)
+    // }
+// }
+
 export default {
     addAction,
     deleteAction,
