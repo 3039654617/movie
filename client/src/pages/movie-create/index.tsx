@@ -90,10 +90,10 @@ const MovieCreate: React.FC<{}> = (props) => {
                     rules={[{ required: true, message: '请选择类型' }]}
                 >
                     <Select>
-                        <Select.Option value="xiju">喜剧</Select.Option>
-                        <Select.Option value="kongfu">动作</Select.Option>
-                        <Select.Option value="love">爱情</Select.Option>
-                        <Select.Option value="kongbu">恐怖</Select.Option>
+                        <Select.Option value="喜剧">喜剧</Select.Option>
+                        <Select.Option value="动作">动作</Select.Option>
+                        <Select.Option value="爱情">爱情</Select.Option>
+                        <Select.Option value="恐怖">恐怖</Select.Option>
                     </Select>
                 </Form.Item>
                 <Form.Item

@@ -14,4 +14,4 @@ const movieSchema = new Mongoose.Schema<IMovie>({
     versionKey: false
 })
 
-export const movieModel = Mongoose.model<IMovie>("maoYanMovies", movieSchema);
+export const movieModel = Mongoose.model<IMovie>("newMovies", movieSchema);
