@@ -20,7 +20,8 @@ const config: IConfig =  {
           component: '../pages/movies-list/index' 
         },
         { 
-          path: '/create', 
+          path: '/create/:id', 
+          // exact: false,
           name: '添加',
           component: '../pages/movie-create/index' 
         }

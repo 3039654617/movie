@@ -31,7 +31,7 @@ const BasicLayout: React.FC = (props: any) => {
         flag[liIndex].className = 'selected'
         // console.log(flag[liIndex]);
 
-        router.push('./first');
+        router.push('/first');
         break;
       case '电影列表':
         for (let i = 0; i < flag.length; i++) {
@@ -40,14 +40,14 @@ const BasicLayout: React.FC = (props: any) => {
         flag[liIndex].className = 'selected'
         // console.log(flag[liIndex]);
 
-        router.push('./movie');
+        router.push('/movie');
         break;
       case '增加电影':
         for (let i = 0; i < flag.length; i++) {
           flag[i].className = ''
         }
         flag[liIndex].className = 'selected'
-        router.push('./create');
+        router.push('/create/0');
         break;
       // default:
       // router.push('./');

@@ -100,13 +100,12 @@ const TableList:React.FC = (props: any) => {
       dataIndex: 'operation',
       key: 'operation',
       render: (text: any, record: { _id: string; }) => {
-        
         return (
           <div className='operation'>
             <span 
               style={{cursor: 'pointer'}}
               onClick={() => {
-                router.push('/create')
+                router.push(`/create/${record._id}`)
               }}
             >
               编辑
@@ -114,7 +113,7 @@ const TableList:React.FC = (props: any) => {
             <span 
               style={{marginLeft: '1vw', cursor: 'pointer'}}
               onClick={() => {
-                store.dispatch(action.deleteMovie(record._id) as any)
+                props.delete && props.delete(record._id)
               }}
             >
               删除
@@ -124,6 +123,25 @@ const TableList:React.FC = (props: any) => {
       }
     }
   ];
+
+  const pagination = () => {
+    
+    return {
+      current: props.condition.page,
+      total: props.total,
+      limit: props.condition.limit
+    }
+  }
+
+  function onChange(pagin: any) {
+    console.log(pagin, pagin.limit, pagin.page);
+    
+    store.dispatch(action.fetchMovies({
+      limit: pagin.pageSize,
+      page: pagin.current
+    }) as any)
+  }
+
   return (
     <div>
       <div className='tips'>
@@ -141,7 +159,8 @@ const TableList:React.FC = (props: any) => {
       <Table 
         dataSource={dataSource} 
         columns={columns} 
-        pagination={true}
+        pagination={pagination()}
+        onChange={onChange}
       />
     </div>
   );
@@ -155,9 +174,12 @@ const mapStateToEvents = (dispatch) => {
   return {
     onload() {
       dispatch(action.fetchMovies({
-        limit: 100,
+        limit: 10,
         page: 1
       }) as any)
+    },
+    delete(id: string) {
+      store.dispatch(action.deleteMovie(id) as any)
     }
   }
 }
